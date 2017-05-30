@@ -1,1 +1,455 @@
-hola
+<div class="barra">
+    <center><p class="titulo">Sistema de Inventarios<span class="glyphicon glyphicon-log-out iconoSalir"></span></p></center>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4><img class="img-circle iconoAgregar" src="img/IconoAgregar.png" data-toggle="modal" data-target="#nuevoUsuario">Agregar un Nuevo Usuario</h4>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1" style="margin-top: 20px;">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <tr>
+                                <th class="centro">Id</th>
+                                <th class="centro">Cédula</th>
+                                <th class="centro">Alias</th>
+                                <th class="centro">Rol</th>
+                                <th class="centro">Fecha de Creacion</th>
+                            </tr>
+                            <tr ng-repeat="usuario in usuarios">
+                                <td>{{usuario.usu_id}}</td>
+                                <td>{{usuario.usu_cedula}}</td>
+                                <td>{{usuario.usu_alias}}</td>
+                                <td>{{usuario.rol_id}}</td>
+                                <td>{{usuario.usu_created_at}}</td>
+                                <td><i ng-click="editar(colaborador)" title="Editar" class="glyphicon glyphicon-pencil iconoTabla"></i>
+                                    <i ng-click="eliminar(colaborador)" class="glyphicon glyphicon-trash"></i></td>
+                            </tr>
+
+                        </table>
+                        <nav aria-label="...">
+                            <ul class="pager">
+                                <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Anterior</a></li>
+                                <li class="next"><a href="#">Siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h4><img class="img-circle iconoAgregar" src="img/inventario.png" data-toggle="modal" data-target="#nuevoArticulo">Agregar un Nuevo Articulo</h4>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1" style="margin-top: 20px;">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <tr>
+                                <th class="centro">Id</th>
+                                <th class="centro">Codigo</th>
+                                <th class="centro">Nombre</th>
+                                <th class="centro">Descripcion</th>
+                                <th class="centro">Usuario</th>
+                            </tr>
+                            <tr ng-repeat="articulo in articulos">
+                                <td>{{articulo.usu_id}}</td>
+                                <td>{{articulo.usu_cedula}}</td>
+                                <td>{{articulo.usu_alias}}</td>
+                                <td>{{articulo.rol_id}}</td>
+                                <td>{{articulo.usu_created_at}}</td>
+                                <td><i ng-click="editar(colaborador)" title="Editar" class="glyphicon glyphicon-pencil iconoTabla"></i>
+                                    <i ng-click="eliminar(colaborador)" class="glyphicon glyphicon-trash"></i></td>
+                            </tr>
+
+                        </table>
+                        <nav aria-label="...">
+                            <ul class="pager">
+                                <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Anterior</a></li>
+                                <li class="next"><a href="#">Siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALES DEL USUARIO -->
+
+<!-- MODAL NUEVO USUARIO-->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="nuevoUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-circle"></i>
+                    Nuevo Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="submit()">
+                    <div class="alert alert-success" ng-show="usuarioRegistrado">
+                        <center>Usuario Creado Con Exito</center>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
+                            </span>
+                            <input ng-model="dataRegistrarUsuario.cedula" type="number" class="form-control" aria-label="..." placeholder="CEDULA" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user-secret iconoForm"></i>
+                            </span>
+                            <input ng-model="dataRegistrarUsuario.alias" type="text" class="form-control" aria-label="..." placeholder="USUARIO" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock iconoForm3"></i>
+                            </span>
+                            <input ng-model="dataRegistrarUsuario.contrasena" type="password" class="form-control" aria-label="..." placeholder="CONTRASEÑA" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-unlock-alt iconoForm3"></i>
+                            </span>
+                            <input ng-model="dataRegistrarUsuario.contrasena2" type="password" class="form-control" aria-label="..." placeholder="CONFIRMAR CONTRASEÑA" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users"></i>
+                            </span>
+                            <select ng-model="dataRegistrarUsuario.rol" class="form-control input-sm" aria-label="...">
+                                <option value="">Seleccione Rol</option>
+                                <option value="1">ADMIN</option>
+                                <option value="2">CELADOR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary btn-block btn-sm">Crear Usuario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL EDITAR USUARIO-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" id="editarUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-pencil"></i>
+                    Editar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="submitEditarUsuario()">
+                    <div class="alert alert-success" ng-show="usuarioEditado">
+                        <center>Usuario Editado Con Exito</center>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">DATOS PERSONALES</div>
+                                <div class="panel-body">
+                                    <div class="form-group" hidden>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.id" aria-label="..." readonly placeholder="id">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.cedula" aria-label="..." placeholder="CEDULA" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user-circle-o"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.nombre" aria-label="..." placeholder="NOMBRE">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user iconoForm"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.apellido" aria-label="..." placeholder="APELLIDO">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-mobile iconoForm2"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.telefono" aria-label="..." placeholder="TELEFONO">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">DATOS DEL USUARIO</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user-secret iconoForm"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.alias" aria-label="..." placeholder="USUARIO">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock iconoForm3"></i>
+                                            </span>
+                                            <input type="password" class="form-control" ng-model="edit.contrasena" aria-label="..." placeholder="CONTRASEÑA">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-unlock-alt iconoForm3"></i>
+                                            </span>
+                                            <input type="password" class="form-control" ng-model="edit.contrasena2" aria-label="..." placeholder="CONFIRMAR CONTRASEÑA">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-users"></i>
+                                            </span>
+                                            <select class="form-control input-sm" ng-model="edit.rol" aria-label="...">
+                                                <option value="1">USUARIO</option>
+                                                <option value="2">ADMIN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary btn-block btn-sm">Editar Usuario</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL ELIMINAR COLABORADOR-->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="eliminarUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-trash"></i>
+                    Eliminar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" ng-show="colaboradorEliminado">
+                    <center>Usuario Eliminado</center>
+                </div>
+                <center>
+                    <h4>Esta seguro?</h4>
+                    <p>Se va a eliminar el Usuario</p>
+                    <h3>{{nombre}}</h3>
+                </center>
+                <button ng-click="submitEliminarUsuario()" type="button" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- MODALES DEL ARTICULOS -->
+
+<!-- MODAL NUEVO ARTICULO-->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="nuevoArticulo" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-circle"></i>
+                    Nuevo Articulo</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="submit()">
+                    <div class="alert alert-success" ng-show="usuarioRegistrado">
+                        <center>Usuario Creado Con Exito</center>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-barcode"></i>
+                            </span>
+                            <input ng-model="dataRegistrarArticulo.codigo" type="number" class="form-control" aria-label="..." placeholder="CODIGO" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-archive iconoForm"></i>
+                            </span>
+                            <input ng-model="dataRegistrarArticulo.nombre" type="text" class="form-control" aria-label="..." placeholder="NOMBRE" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-pencil iconoForm3"></i>
+                            </span>
+                            <input ng-model="dataRegistrarArticulo.descripcion" type="password" class="form-control" aria-label="..." placeholder="DESCRIPCION" required>
+                        </div>
+                    </div>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary btn-block btn-sm">Registrar Articulo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL EDITAR ARTICULO-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" id="editarUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-pencil"></i>
+                    Editar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="submitEditarUsuario()">
+                    <div class="alert alert-success" ng-show="usuarioEditado">
+                        <center>Usuario Editado Con Exito</center>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">DATOS PERSONALES</div>
+                                <div class="panel-body">
+                                    <div class="form-group" hidden>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.id" aria-label="..." readonly placeholder="id">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.cedula" aria-label="..." placeholder="CEDULA" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user-circle-o"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.nombre" aria-label="..." placeholder="NOMBRE">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user iconoForm"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.apellido" aria-label="..." placeholder="APELLIDO">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-mobile iconoForm2"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.telefono" aria-label="..." placeholder="TELEFONO">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">DATOS DEL USUARIO</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user-secret iconoForm"></i>
+                                            </span>
+                                            <input type="text" class="form-control" ng-model="edit.alias" aria-label="..." placeholder="USUARIO">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock iconoForm3"></i>
+                                            </span>
+                                            <input type="password" class="form-control" ng-model="edit.contrasena" aria-label="..." placeholder="CONTRASEÑA">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-unlock-alt iconoForm3"></i>
+                                            </span>
+                                            <input type="password" class="form-control" ng-model="edit.contrasena2" aria-label="..." placeholder="CONFIRMAR CONTRASEÑA">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-users"></i>
+                                            </span>
+                                            <select class="form-control input-sm" ng-model="edit.rol" aria-label="...">
+                                                <option value="1">USUARIO</option>
+                                                <option value="2">ADMIN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary btn-block btn-sm">Editar Usuario</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL ELIMINAR ARTICULO-->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="eliminarUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-trash"></i>
+                    Eliminar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" ng-show="colaboradorEliminado">
+                    <center>Usuario Eliminado</center>
+                </div>
+                <center>
+                    <h4>Esta seguro?</h4>
+                    <p>Se va a eliminar el Usuario</p>
+                    <h3>{{nombre}}</h3>
+                </center>
+                <button ng-click="submitEliminarUsuario()" type="button" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
