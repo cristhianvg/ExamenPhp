@@ -7,35 +7,27 @@
     <Tbl UsSo="1" nm="articulo">
       <TblOpts>WITHOUT OIDS</TblOpts>
       <Pk ClNs="art_id" nm="pkarticulo"/>
-      <Cl au="1" df="" nm="art_id" nu="0">
+      <Cl au="1" df="nextval('articulo_art_id_seq'::regclass)" nm="art_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="art_codigo" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="art_nombre" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="45" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="art_descripcion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="null" sc="null" sg="1" un="0"/>
-      </Cl>
-      <Cl au="0" df="" nm="usu_id" nu="0">
-        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="45" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="Now()" nm="art_created_at" nu="0">
-        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="art_deleted_at" nu="1">
-        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="art_updated_at" nu="1">
-        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Fk deAc="1" nm="fk_articulo_usuario" prLkCl="usu_id" upAc="1">
-        <PrTb mn="0" nm="usuario" oe="1" sch="public" zr="0"/>
-        <CdTb mn="1" nm="articulo" oe="1" sch="public" zr="0"/>
-        <ClPr cdCl="usu_id" prCl="usu_id"/>
-      </Fk>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -70,13 +62,13 @@
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="Now()" nm="usu_created_at" nu="0">
-        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="usu_deleted_at" nu="1">
-        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="usu_updated" nu="1">
-        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Fk deAc="1" nm="fk_usuario_rol" prLkCl="rol_id" upAc="1">
         <PrTb mn="0" nm="rol" oe="1" sch="public" zr="0"/>
@@ -119,9 +111,6 @@
     <TbGl bkCl="ff6666ff" sch="public" tbl="usuario" x="298" y="182"/>
     <TbGl bkCl="ff6666ff" sch="public" tbl="rol" x="69" y="90"/>
     <TbGl bkCl="ff6666ff" sch="public" tbl="articulo" x="605" y="296"/>
-    <FkGl bkCl="ff000000" childEdge="" nm="public.articulo.fk_articulo_usuario" parentEdge="" positioner="">
-      <positionableLines/>
-    </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="public.usuario.fk_usuario_rol" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
       <positionableLines/>
     </FkGl>
@@ -177,9 +166,7 @@
       <BoolOpt lbl="Views" nm="doc.views" on="1" spl="0"/>
     </BasicOptionMgr>
   </DbDocOptionMgr>
-  <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.diagramA" selected="1"/>
-  </OpenEditors>
+  <OpenEditors/>
   <TreePaths>
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>

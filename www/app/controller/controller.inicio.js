@@ -6,7 +6,15 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
             contrasena: '',
             rol: ''
         };
+        
+        $scope.dataRegistrarArticulo = {
+            codigo: '',
+            nombre: '',
+            descripcion: ''
+        };
+        
         $scope.usuarioRegistrado = false;
+        $scope.articuloRegistrado = false;
 
         $scope.pintarTabla = function () {
             agregarUsuario.obtenerUsu.then(function successCallback(response) {
@@ -43,7 +51,34 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
             }, function errorCallback(response) {
                 console.error(response);
             });
-
         };
+        
+        
+        
+        $scope.submitNuevoArticulo = function () {
+            agregarUsuario.agregarArt($scope.dataRegistrarArticulo).then(function successCallback(response) {
+                // console.log(response);
+
+                $scope.articuloRegistrado = false;
+                $scope.dataRegistrarArticulo = {};
+                if (response.data.code == 500) {
+                } else {
+                    $scope.articuloRegistrado = true;
+                    $scope.dataRegistrarArticulo = '';
+                    $timeout(function () {
+                        $('#nuevoArticulo').modal('toggle');
+                    }, 700);
+                    $timeout(function () {
+                        // $route.reload();
+                        //window.location.reload();
+                    }, 1000);
+                }
+            }, function errorCallback(response) {
+                console.error(response);
+            });
+        };
+        
+        
+        
         
     }]);
