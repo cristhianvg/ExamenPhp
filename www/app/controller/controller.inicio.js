@@ -21,6 +21,7 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
         $scope.articuloRegistrado = false;
         $scope.usuarioEditado = false;
         $scope.articuloEditado = false;
+        $scope.usuarioEliminado = false;
 
         $scope.pintarTablaUsu = function () {
             agregarUsuario.obtenerUsu.then(function successCallback(response) {
@@ -154,6 +155,32 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
                     $timeout(function () {
                         // $route.reload();
                         //window.location.reload();
+                    }, 1000);
+                }
+            }, function errorCallback(response) {
+                console.error(response);
+            });
+        };
+        
+        
+        $scope.eliminar = function (dato) {
+            $('#eliminarUsuario').modal('toggle');
+            $scope.alias = dato.usu_alias;
+            $scope.ideliminar = dato.usu_id;
+        };
+        
+        $scope.submitEliminarUsuario = function () {
+            agregarUsuario.eliminarUsu({id: $scope.ideliminar}).then(function successCallback(response) {
+                $scope.usuarioEliminado = false;
+                if (response.data.code == 500) {
+                } else {
+                    $scope.usuarioEliminado = true;
+                    $timeout(function () {
+                        $('#eliminarUsuario').modal('toggle');
+                    }, 700);
+                    $timeout(function () {
+                        // $route.reload();
+                        window.location.reload();
                     }, 1000);
                 }
             }, function errorCallback(response) {

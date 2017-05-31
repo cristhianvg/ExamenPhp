@@ -222,13 +222,13 @@
                     Eliminar Usuario</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success" ng-show="colaboradorEliminado">
+                <div class="alert alert-success" ng-show="usuarioEliminado">
                     <center>Usuario Eliminado</center>
                 </div>
                 <center>
                     <h4>Esta seguro?</h4>
                     <p>Se va a eliminar el Usuario</p>
-                    <h3>{{nombre}}</h3>
+                    <h3>{{alias}}</h3>
                 </center>
                 <button ng-click="submitEliminarUsuario()" type="button" class="btn btn-danger btn-block btn-sm">Eliminar</button>
             </div>
@@ -336,7 +336,7 @@
 </div>
 
 <!-- MODAL ELIMINAR ARTICULO-->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" id="eliminarUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="eliminarArticulo" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
