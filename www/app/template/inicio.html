@@ -52,15 +52,18 @@
                                 <th class="centro">Nombre</th>
                                 <th class="centro">Descripcion</th>
                                 <th class="centro">Fecha de Registro</th>
+                                <th class="centro">Acciones</th>
                             </tr>
                             <tr ng-repeat="articulo in articulos">
-                                <td>{{articulo.art_id}}</td>
-                                <td>{{articulo.art_codigo}}</td>
-                                <td>{{articulo.art_nombre}}</td>
-                                <td>{{articulo.art_descripcion}}</td>
-                                <td>{{articulo.art_created_at}}</td>
-                                <td><i ng-click="editarArt(articulo)" title="Editar" class="glyphicon glyphicon-pencil iconoTabla"></i>
-                                    <i ng-click="eliminar(articulo)" class="glyphicon glyphicon-trash"></i></td>
+                                <td class="centro">{{articulo.art_id}}</td>
+                                <td class="centro">{{articulo.art_codigo}}</td>
+                                <td class="centro">{{articulo.art_nombre}}</td>
+                                <td class="centro">{{articulo.art_descripcion}}</td>
+                                <td class="centro">{{articulo.art_created_at}}</td>
+                                <td class="centro">
+                                    <i ng-click="editarArt(articulo)" title="Editar" class="glyphicon glyphicon-pencil iconoTabla"></i>
+                                    <i ng-click="eliminarArt(articulo)" class="glyphicon glyphicon-trash"></i>
+                                </td>
                             </tr>
 
                         </table>
@@ -342,18 +345,18 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel"><i class="fa fa-trash"></i>
-                    Eliminar Usuario</h4>
+                    Eliminar Articulo</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success" ng-show="colaboradorEliminado">
-                    <center>Usuario Eliminado</center>
+                <div class="alert alert-success" ng-show="ArticuloEliminado">
+                    <center>Articulo Eliminado</center>
                 </div>
                 <center>
                     <h4>Esta seguro?</h4>
                     <p>Se va a eliminar el Usuario</p>
                     <h3>{{nombre}}</h3>
                 </center>
-                <button ng-click="submitEliminarUsuario()" type="button" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+                <button ng-click="submitEliminarArticulo()" type="button" class="btn btn-danger btn-block btn-sm">Eliminar</button>
             </div>
         </div>
     </div>

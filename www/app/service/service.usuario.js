@@ -23,4 +23,8 @@ angular.module('ExamenPhp').service('registroUsuarioService', ['$http', function
     this.editarArt = function (data) {
       return $http.post('http://localhost/ExamenPhp/www/server.php/editarArticulo', $.param(data));
     };
+    
+    this.eliminarArt = function (data) {
+      return $http.post('http://localhost/ExamenPhp/www/server.php/eliminarArticulo', $.param(data));
+    };
 }]);

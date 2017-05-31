@@ -188,4 +188,30 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
             });
         };
         
+        
+        $scope.eliminarArt = function (dato) {
+            $('#eliminarArticulo').modal('toggle');
+            $scope.nombre = dato.art_nombre;
+            $scope.ideliminar = dato.art_id;
+        };
+        
+        $scope.submitEliminarArticulo = function () {
+            agregarUsuario.eliminarArt({id: $scope.ideliminar}).then(function successCallback(response) {
+                $scope.articuloEliminado = false;
+                if (response.data.code == 500) {
+                } else {
+                    $scope.articuloEliminado = true;
+                    $timeout(function () {
+                        $('#eliminarArticulo').modal('toggle');
+                    }, 700);
+                    $timeout(function () {
+                        // $route.reload();
+                        window.location.reload();
+                    }, 1000);
+                }
+            }, function errorCallback(response) {
+                console.error(response);
+            });
+        };
+        
     }]);
