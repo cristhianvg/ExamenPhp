@@ -13,10 +13,14 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
             descripcion: ''
         };
         
+        $scope.usuarios=[];
+        $scope.articulos=[];
+        $scope.edit = {};
         $scope.usuarioRegistrado = false;
         $scope.articuloRegistrado = false;
+        $scope.usuarioEditado = false;
 
-        $scope.pintarTabla = function () {
+        $scope.pintarTablaUsu = function () {
             agregarUsuario.obtenerUsu.then(function successCallback(response) {
                 switch (response.data.code) {
                     case 200:
@@ -27,8 +31,23 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
                 }
             });
         };
+        
+        $scope.pintarTablaUsu();
+        
+        $scope.pintarTablaArt = function () {
+            agregarUsuario.obtenerArt.then(function successCallback(response) {
+                switch (response.data.code) {
+                    case 200:
+                        $scope.articulos = response.data.datos;
+                        break;
+                    case 500:
+                        $scope.articulos = [];
+                }
+            });
+        };
 
-        $scope.pintarTabla();
+        
+        $scope.pintarTablaArt();
  
         $scope.submitNuevoUsuario = function () {
             agregarUsuario.agregarUsu($scope.dataRegistrarUsuario).then(function successCallback(response) {
@@ -45,7 +64,7 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
                     }, 700);
                     $timeout(function () {
                         // $route.reload();
-                        //window.location.reload();
+                        window.location.reload();
                     }, 1000);
                 }
             }, function errorCallback(response) {
@@ -70,7 +89,7 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
                     }, 700);
                     $timeout(function () {
                         // $route.reload();
-                        //window.location.reload();
+                        window.location.reload();
                     }, 1000);
                 }
             }, function errorCallback(response) {
@@ -80,5 +99,32 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
         
         
         
+        $scope.editar = function (dato) {
+            $scope.edit.id = dato.usu_id;
+            $scope.edit.cedula = dato.usu_cedula;
+            $scope.edit.alias = dato.usu_alias;
+            $scope.edit.rol = dato.usu_rol;
+            $('#editarUsuario').modal('toggle');
+        };
         
+        $scope.submitEditarUsuario = function () {
+            agregarUsuario.editarUsu($scope.edit).then(function successCallback(response) {
+                $scope.usuarioEditado = false;
+                $scope.edit = {};
+                if (response.data.code == 500) {
+                } else {
+                    $scope.usuarioEditado = true;
+                    $scope.edit = '';
+                    $timeout(function () {
+                        $('#editarUsuario').modal('toggle');
+                    }, 700);
+                    $timeout(function () {
+                        // $route.reload();
+                        window.location.reload();
+                    }, 1000);
+                }
+            }, function errorCallback(response) {
+                console.error(response);
+            });
+        };
     }]);

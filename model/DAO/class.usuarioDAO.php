@@ -39,7 +39,7 @@ class usuarioDAO extends dataSource implements IUsuario {
   }
 
   public function select() {
-	$sql = 'SELECT usu_cedula, usu_alias, usu_contrasena, rol_id FROM usuario WHERE usu_deleted_at IS NULL';
+	$sql = 'SELECT usu_id, usu_cedula, usu_alias, usu_contrasena, rol_id, usu_created_at FROM usuario WHERE usu_deleted_at IS NULL';
 	return $this->query($sql);
   }
 
@@ -52,12 +52,12 @@ class usuarioDAO extends dataSource implements IUsuario {
   }
 
   public function update(\usuario $usuario) {
-	$sql = 'UPDATE usuario SET usu_cedula = :cedula, usu_alias = :alias, usu_contrasena = :contrasena, rol_id = :rolId WHERE usu_id = :id';
+	$sql = 'UPDATE usuario SET usu_cedula = :cedula, usu_alias = :alias, usu_contrasena = :contrasena, rol_id = :rol WHERE usu_id = :id';
 	$params = array(
 		':alias' => $usuario->getAlias(),
 		':cedula' => $usuario->getCedula(),
 		':contrasena' => $usuario->getContrasena($this->getConfig()->getHash()),
-		':rolId' => $usuario->getRolId(),
+		':rol' => $usuario->getRolid(),
 		':id' => $usuario->getId()
 	);
 	return $this->execute($sql, $params);

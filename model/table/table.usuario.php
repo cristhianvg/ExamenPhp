@@ -40,8 +40,8 @@ class usuario {
         $this->alias = $alias;
     }
 
-    function setContrasena($contrasena) {
-        $this->contrasena = $contrasena;
+    function setContrasena($contrasena, $hash) {
+        $this->contrasena = hash($hash, $contrasena, false);
     }
 
     function setRolid($rolid) {

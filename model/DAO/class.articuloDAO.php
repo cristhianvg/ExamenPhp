@@ -37,12 +37,12 @@ class articuloDAO extends dataSource implements Iarticulo {
   }
 
   public function select() {
-	$sql = 'SELECT art_id, art_codigo, art_nombre, art_descripcion FROM articulo WHERE art_deleted_at IS NULL';
+	$sql = 'SELECT art_id, art_codigo, art_nombre, art_descripcion, art_created_at FROM articulo WHERE art_deleted_at IS NULL';
 	return $this->query($sql);
   }
 
   public function selectById($id) {
-	$sql = 'SELECT art_id, art_codigo, art_nombre, art_descripcion FROM articulo WHERE art_id = :id';
+	$sql = 'SELECT art_id, art_codigo, art_nombre, art_descripcion, FROM articulo WHERE art_id = :id';
 	$params = array(
 		':id' => $id
 	);

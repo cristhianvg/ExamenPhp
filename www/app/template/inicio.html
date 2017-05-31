@@ -15,15 +15,18 @@
                                 <th class="centro">Alias</th>
                                 <th class="centro">Rol</th>
                                 <th class="centro">Fecha de Creacion</th>
+                                <th class="centro">Acciones</th>
                             </tr>
                             <tr ng-repeat="usuario in usuarios">
-                                <td>{{usuario.usu_id}}</td>
-                                <td>{{usuario.usu_cedula}}</td>
-                                <td>{{usuario.usu_alias}}</td>
-                                <td>{{usuario.rol_id}}</td>
-                                <td>{{usuario.usu_created_at}}</td>
-                                <td><i ng-click="editar(colaborador)" title="Editar" class="glyphicon glyphicon-pencil iconoTabla"></i>
-                                    <i ng-click="eliminar(colaborador)" class="glyphicon glyphicon-trash"></i></td>
+                                <td class="centro">{{usuario.usu_id}}</td>
+                                <td class="centro">{{usuario.usu_cedula}}</td>
+                                <td class="centro">{{usuario.usu_alias}}</td>
+                                <td class="centro">{{usuario.rol_id}}</td>
+                                <td class="centro">{{usuario.usu_created_at}}</td>
+                                <td class="centro">
+                                    <i ng-click="editar(usuario)" title="Editar" class="glyphicon glyphicon-pencil iconoTabla"></i>
+                                    <i ng-click="eliminar(usuario)" class="glyphicon glyphicon-trash"></i>
+                                </td>
                             </tr>
 
                         </table>
@@ -48,14 +51,14 @@
                                 <th class="centro">Codigo</th>
                                 <th class="centro">Nombre</th>
                                 <th class="centro">Descripcion</th>
-                                <th class="centro">Usuario</th>
+                                <th class="centro">Fecha de Registro</th>
                             </tr>
                             <tr ng-repeat="articulo in articulos">
-                                <td>{{articulo.usu_id}}</td>
-                                <td>{{articulo.usu_cedula}}</td>
-                                <td>{{articulo.usu_alias}}</td>
-                                <td>{{articulo.rol_id}}</td>
-                                <td>{{articulo.usu_created_at}}</td>
+                                <td>{{articulo.art_id}}</td>
+                                <td>{{articulo.art_codigo}}</td>
+                                <td>{{articulo.art_nombre}}</td>
+                                <td>{{articulo.art_descripcion}}</td>
+                                <td>{{articulo.art_created_at}}</td>
                                 <td><i ng-click="editar(colaborador)" title="Editar" class="glyphicon glyphicon-pencil iconoTabla"></i>
                                     <i ng-click="eliminar(colaborador)" class="glyphicon glyphicon-trash"></i></td>
                             </tr>
@@ -141,8 +144,8 @@
 
 
 <!-- MODAL EDITAR USUARIO-->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" id="editarUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="editarUsuario" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -154,94 +157,55 @@
                     <div class="alert alert-success" ng-show="usuarioEditado">
                         <center>Usuario Editado Con Exito</center>
                     </div>
-
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">DATOS PERSONALES</div>
-                                <div class="panel-body">
-                                    <div class="form-group" hidden>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
-                                            </span>
-                                            <input type="text" class="form-control" ng-model="edit.id" aria-label="..." readonly placeholder="id">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
-                                            </span>
-                                            <input type="text" class="form-control" ng-model="edit.cedula" aria-label="..." placeholder="CEDULA" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user-circle-o"></i>
-                                            </span>
-                                            <input type="text" class="form-control" ng-model="edit.nombre" aria-label="..." placeholder="NOMBRE">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user iconoForm"></i>
-                                            </span>
-                                            <input type="text" class="form-control" ng-model="edit.apellido" aria-label="..." placeholder="APELLIDO">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-mobile iconoForm2"></i>
-                                            </span>
-                                            <input type="text" class="form-control" ng-model="edit.telefono" aria-label="..." placeholder="TELEFONO">
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="panel-body">
+                        <div class="form-group" hidden>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="edit.id" aria-label="..." readonly placeholder="id">
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">DATOS DEL USUARIO</div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user-secret iconoForm"></i>
-                                            </span>
-                                            <input type="text" class="form-control" ng-model="edit.alias" aria-label="..." placeholder="USUARIO">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock iconoForm3"></i>
-                                            </span>
-                                            <input type="password" class="form-control" ng-model="edit.contrasena" aria-label="..." placeholder="CONTRASEÑA">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-unlock-alt iconoForm3"></i>
-                                            </span>
-                                            <input type="password" class="form-control" ng-model="edit.contrasena2" aria-label="..." placeholder="CONFIRMAR CONTRASEÑA">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-users"></i>
-                                            </span>
-                                            <select class="form-control input-sm" ng-model="edit.rol" aria-label="...">
-                                                <option value="1">USUARIO</option>
-                                                <option value="2">ADMIN</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="edit.cedula" aria-label="..." placeholder="CEDULA" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user-secret iconoForm"></i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="edit.alias" aria-label="..." placeholder="USUARIO">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock iconoForm3"></i>
+                                </span>
+                                <input type="password" class="form-control" ng-model="edit.contrasena" aria-label="..." placeholder="CONTRASEÑA">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-unlock-alt iconoForm3"></i>
+                                </span>
+                                <input type="password" class="form-control" ng-model="edit.contrasena2" aria-label="..." placeholder="CONFIRMAR CONTRASEÑA">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users"></i>
+                                </span>
+                                <select class="form-control input-sm" ng-model="edit.rol" aria-label="...">
+                                    <option value="">Seleccione el Rol</option>
+                                    <option value="1">USUARIO</option>
+                                    <option value="2">ADMIN</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-lg-offset-3">
-                            <button type="submit" class="btn btn-primary btn-block btn-sm">Editar Usuario</button>
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-sm">Editar Usuario</button>
                 </form>
             </div>
         </div>

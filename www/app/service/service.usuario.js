@@ -18,4 +18,6 @@ angular.module('ExamenPhp').service('registroUsuarioService', ['$http', function
       return $http.post('http://localhost/ExamenPhp/www/server.php/agregarArticulo', $.param(data));
     };
     
+    this.obtenerArt = $http.get('http://localhost/ExamenPhp/www/server.php/obtenerArticulo');
+    
 }]);
