@@ -16,9 +16,11 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
         $scope.usuarios=[];
         $scope.articulos=[];
         $scope.edit = {};
+        $scope.editArt = {};
         $scope.usuarioRegistrado = false;
         $scope.articuloRegistrado = false;
         $scope.usuarioEditado = false;
+        $scope.articuloEditado = false;
 
         $scope.pintarTablaUsu = function () {
             agregarUsuario.obtenerUsu.then(function successCallback(response) {
@@ -127,4 +129,36 @@ angular.module('ExamenPhp').controller('inicioController', ['$scope', 'registroU
                 console.error(response);
             });
         };
+        
+        
+        
+        $scope.editarArt = function (dato) {
+            $scope.editArt.id = dato.art_id;
+            $scope.editArt.codigo = dato.art_codigo;
+            $scope.editArt.nombre = dato.art_nombre;
+            $scope.editArt.descripcion = dato.art_descripcion;
+            $('#editarArticulo').modal('toggle');
+        };
+        
+        $scope.submitEditarArticulo = function () {
+            agregarUsuario.editarArt($scope.editArt).then(function successCallback(response) {
+                $scope.articuloEditado = false;
+                $scope.editArt = {};
+                if (response.data.code == 500) {
+                } else {
+                    $scope.articuloEditado = true;
+                    $scope.editArt = '';
+                    $timeout(function () {
+                        $('#editarArticulo').modal('toggle');
+                    }, 700);
+                    $timeout(function () {
+                        // $route.reload();
+                        //window.location.reload();
+                    }, 1000);
+                }
+            }, function errorCallback(response) {
+                console.error(response);
+            });
+        };
+        
     }]);
